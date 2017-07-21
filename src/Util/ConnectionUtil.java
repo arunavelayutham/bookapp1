@@ -2,6 +2,7 @@ package Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -18,12 +19,14 @@ public class ConnectionUtil {
              
             Class.forName("com.mysql.jdbc.Driver");
 	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/app_db", "root", "root");
-        } catch (Exception e) {
-            throw new Exception(e);
+        } catch (SQLException e) {
+            throw new Exception("Unable to connect");
             
         }
         return con;
-	}
+            
+        }
+        
          
      
 
@@ -31,7 +34,7 @@ public class ConnectionUtil {
 
 		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3307/_db");
+		ds.setUrl("jdbc:mysql://localhost:3306/app_db");
 		ds.setUsername("root");
 		ds.setPassword("root");
 		return ds;

@@ -49,14 +49,15 @@ public class LoginServlet extends HttpServlet {
 			{
 				HttpSession session =request.getSession();
 			session.setAttribute("Logged_In_User",user);
-				response.sendRedirect("listbook.jsp");
+				
 				
 	}
-										
+			response.sendRedirect("listbook.jsp");						
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 	
 		
