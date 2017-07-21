@@ -19,26 +19,32 @@ public class userDAO {
 		System.out.println("no of rows inserted:" + rows);
 	}
 
-	public List<users> login(String email, String password) throws Exception {
+	public users login(String email, String password) throws Exception {
 		String sql = "select id,name,emailid,password from users where emailid = ? and password = ? ";
 
 		Object[] params = { email, password };
-		List<users> userList = jdbcTemplate.query(sql, params, (rs, rowNum) -> {
+		users u = null;
+		try {
+			u = jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
 
-			int id = rs.getInt("id");
-			String name = rs.getString("name");
-			String emailid = rs.getString("emailid");
-			String password1 = rs.getString("password");
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String emailid = rs.getString("emailid");
+				String password1 = rs.getString("password");
 
-			users user = new users();
-			user.setId(id);
-			user.setName(name);
-			user.setEmailid(emailid);
-			user.setPassword(password1);
-			System.out.println(user);
-			return user;
-		});
-		return userList;
+				users user = new users();
+				user.setId(id);
+				user.setName(name);
+				user.setEmailid(emailid);
+				user.setPassword(password1);
+				System.out.println(user);
+				return user;
+			});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return u;
 
 	}
 

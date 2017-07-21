@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		try {
-			List<users> user= userDAO.login(email,password);
+		users user= userDAO.login(email,password);
 			out.println(user);
 			if (user==null)
 			{
